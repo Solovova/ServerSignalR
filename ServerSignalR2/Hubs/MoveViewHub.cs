@@ -11,7 +11,7 @@ namespace ServerSignalR.Hubs
         public async Task MoveViewFromServer(string id, string sensor, string value)
         {
             Console.WriteLine("Receive:  ID -> |" + id + "|  Sensor: |" + sensor +"| Value: |" + value +"|");
-            float dX = 0.6f;
+            //double dX = 0.6f;
             //float dY = 0.0f;
             //string tS = "teeeest";
 
