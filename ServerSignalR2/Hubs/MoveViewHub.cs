@@ -8,15 +8,22 @@ namespace ServerSignalR.Hubs
 {
     public class MoveViewHub : Hub
     {
-        public async Task MoveViewFromServer(string id, string sensor, string value)
+        public async Task SensorIndicatorChangeValueFromSensor(string strJSON)
         {
-            Console.WriteLine("Receive:  ID -> |" + id + "|  Sensor: |" + sensor +"| Value: |" + value +"|");
-            //double dX = 0.6f;
-            //float dY = 0.0f;
-            //string tS = "teeeest";
+            Console.WriteLine("Change value from sensor:  " + strJSON);
+            await Clients.Others.SendAsync("SensorIndicatorChangeValueToApp", strJSON);
+        }
 
-            await Clients.Others.SendAsync("ReceiveNewPositions", id, sensor, value);
-            //await Clients.Others.SendAsync("ReceiveNewPositions",dX);
+        public async Task RequestStartSensorDataFromApp(string strJSON)
+        {
+            Console.WriteLine("Request from app:  " + strJSON);
+            await Clients.Others.SendAsync("RequestStartSensorDataToSensor", strJSON);
+        }
+
+        public async Task AnswerStartSensorDataFromSensor(string strJSON)
+        {
+            Console.WriteLine("Ansver from sensor:  " + strJSON);
+            await Clients.Others.SendAsync("AnswerStartSensorDataToApp", strJSON);
         }
 
     }
